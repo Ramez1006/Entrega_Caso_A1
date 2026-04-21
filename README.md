@@ -16,3 +16,15 @@ Portanto, o problema não pode ser resolvido de forma exata em tempo polinomial 
 ---
 
 ### b) Redução intuitiva do problema da FastBite ao TSP
+ 
+Lembrando que o problema do caixeiro viajante (TSP) é dado como: um conjunto de cidades e as distâncias entre cada par delas, encontrar o menor circuito ou seja, a rota que visita cada cidade exatamente uma vez e retorna ao ponto de partida com custo mínimo.
+
+**Transformando uma instância da FastBite em uma instância do TSP:**
+
+Considerando um único entregador que recebeu x pedidos já atribuídos. O subproblema que ele precisa resolver é: em qual ordem visitar os x restaurantes (coleta) e os x clientes (entrega), respeitando que a coleta de um pedido deve preceder sua entrega?
+
+Podemos modelar isso como: 
+-Cada **ponto** que simboliza o nó relevante da posição inicial do entregador, os x restaurantes e os x clientes — totalizando 2x + 1 nós.
+-Cada **aresta** entre dois nós tem peso igual à distância  entre eles.
+-O objetivo é encontrar o **caminho de custo mínimo** que visita todos os nós respeitando as precedências (coleta antes da entrega).
+
