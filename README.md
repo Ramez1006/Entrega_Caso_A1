@@ -56,3 +56,66 @@ Após a atribuição, cada entregador precisa definir a ordem de coleta e entreg
 
 - Entregador com 3 pedidos: até 6 pontos → 6! / (fator de precedência) ≈ **720 / 8 = 90** rotas válidas, mas na ordem de grandeza de centenas.
 - Entregador com 2 pedidos: até 4 pontos → 4! = **24** permutações.
+
+
+
+**Cálculo total:**
+
+Total ≈ 560 (atribuições) × 90 × 90 × 24 (rotas) ≈ 560 × 194.400 ≈ 108.864.000
+
+**Complexidade assintótica:** O(n! × m^n) onde n é o número de pedidos e m é o número de entregadores — intratável para qualquer instância realista.
+
+**Conclusão:** A força bruta é absolutamente inviável para a FastBite. Mesmo com 8 pedidos, o número de combinações já excede 10⁸, e o sistema precisa decidir em até 2 segundos.
+
+
+---
+
+## Questão 2 — Abordagem Gulosa (Greedy) (25 pontos)
+
+**Parte de Atribuição:**
+
+1. Lista-se todos os pedidos não atribuídos exemplos: {P1, P2, P3, P4, P5}.
+2. Para cada pedido (em ordem de prioridade ou chegada), calcula-se a distância Manhattan de cada entregador disponível (com capacidade restante) ao restaurante do pedido.
+3. Atribui-se o pedido ao entregador mais próximo do restaurante correspondente.
+
+Cálculo  do cenário sendo aplicado:
+
+**Pedido P1** — Restaurante em (0,2):
+- E1 em (1,1): |0-1| + |2-1| = 1 + 1 = **2**
+- E2 em (5,3): |0-5| + |2-3| = 5 + 1 = **6**
+- E3 em (7,6): |0-7| + |2-6| = 7 + 4 = **11**
+- → **P1 atribuído a E1** (distância 2). E1 agora tem 1/2 pedidos.
+
+**Pedido P2** — Restaurante em (1,1):
+- E1 em (1,1): |1-1| + |1-1| = **0** (já está lá)
+- E2 em (5,3): **6**
+- E3 em (7,6): **11**
+- → **P2 atribuído a E1** (distância 0). E1 agora tem 2/2 pedidos — capacidade esgotada.
+
+**Pedido P3** — Restaurante em (4,4):
+- E2 em (5,3): |4-5| + |4-3| = 1 + 1 = **2**
+- E3 em (7,6): |4-7| + |4-6| = 3 + 2 = **5**
+- → **P3 atribuído a E2** (distância 2). E2 agora tem 1/2 pedidos.
+
+**Pedido P4** — Restaurante em (6,1):
+- E2 em (5,3): |6-5| + |1-3| = 1 + 2 = **3**
+- E3 em (7,6): |6-7| + |1-6| = 1 + 5 = **6**
+- → **P4 atribuído a E2** (distância 3). E2 agora tem 2/2 — capacidade esgotada.
+
+**Pedido P5** — Restaurante em (5,5):
+- E3 em (7,6): |5-7| + |5-6| = 2 + 1 = **3**
+- → **P5 atribuído a E3** (único disponível).
+
+
+**Atribuição final:** E1: {P1, P2} | E2: {P3, P4} | E3: {P5}
+
+
+Cada entregador percorre seus pontos indo sempre ao ponto mais próximo de sua posição atual.
+
+**E1** (posição inicial 1,1), pedidos P1 e P2:
+- Pontos a visitar: R_P1(0,2), C_P1(4,5), R_P2(1,1), C_P2(7,2)
+- De (1,1): mais próximo é R_P2(1,1) com distância 0 → visita R_P2 (coleta P2)
+- De (1,1): mais próximo dos restantes é R_P1(0,2) com distância 2 → visita R_P1 (coleta P1)
+- De (0,2): mais próximo é C_P2(7,2) com distância 7 → visita C_P2 (entrega P2)
+- De (7,2): visita C_P1(4,5) com distância 6 → entrega P1
+- Rota: (1,1)→(1,1)→(0,2)→(7,2)→(4,5) — distância total: 0+2+7+6 = **15**
