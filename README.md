@@ -162,4 +162,21 @@ Melhor ainda: E1 recebe {P1, P2}, E2 recebe {P3}... como acima. Mas agora consid
 - E2 recebe P1 e P3: (10,0)→(9,0)→(1,0)→(9,0)→(11,0) — custoso.
 
 **Contraexemplo mais direto:** Suponha que o entregador mais próximo de um restaurante já está quase no limite de capacidade e seria muito mais valioso para um pedido urgente futuro que surgirá no mesmo ciclo. O algoritmo guloso "desperdiça" o entregador no pedido atual e deixa o pedido urgente com um entregador mais distante — aumentando o risco de atraso. O guloso não tem visão de futuro para reconhecer isso.
-1
+
+
+---
+
+### d) Complexidade de tempo do algoritmo guloso
+
+
+**Fase de atribuição:**
+
+Para cada um dos n pedidos, calculamos a distância a cada um dos m entregadores disponíveis e escolhemos o mínimo. Isso é O(m) por pedido. Para n pedidos: **O(n × m)**.
+
+**Fase de roteamento (nearest neighbor para cada entregador):**
+
+Cada entregador tem no máximo x pontos (onde x ≤ capacidade máxima). O algoritmo de vizinho mais próximo percorre os 2x pontos fazendo a cada passo uma busca linear pelos restantes. Custo por entregador: O(x²). Para m entregadores: **O(m × x²)**, onde x é uma constante pequena (até 3 no caso da FastBite), então isso é O(m).
+
+**Complexidade total:** **O(n × m)** — polinomial e viável em tempo real.
+
+Para a FastBite com n = 50 pedidos e m = 20 entregadores no horário de pico: 50 × 20 = 1.000 operações de comparação — trivialmente executável em milissegundos, bem dentro do limite de 2 segundos.
