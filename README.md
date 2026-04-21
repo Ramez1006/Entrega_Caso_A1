@@ -2,7 +2,7 @@
 **Unidade Curricular:** Estruturas de Dados e Análise de Algoritmos (0006963)  
 **Professor:** Alexandre "Montanha" de Oliveira  
 **Nível:** Graduação – Preparatório para a Avaliação A1
-** Aluno:** Ramez Marques 
+**Aluno:** Ramez Marques 
 ---
 ## Questão 1 — Classificação do Problema (20 pontos)
 
@@ -46,4 +46,11 @@ Isso demonstra exatamente o TSP com restrições de precedência, no qual ao tra
 
 Supondo as quantidades de permutações possiveis de entrega, dadas acima, precisamos distribuir 8 pedidos entre 3 entregadores, com cada um recebendo no máximo 3. Uma distribuição possível é, por exemplo, (3, 3, 2). O número de maneiras de fazer essa distribuição é dado pela:
 
-C(8,3) × C(5,3) × C(2,2) = 56 × 10 × 1 = 560 combinações de atribuição
+C(8,3) × C(5,3) × C(2,2) = 56 × 10 × 1 = 560 combinações de atribuição 
+
+**Roteamento de cada entregador:**
+
+Após a atribuição, cada entregador precisa definir a ordem de coleta e entrega dos seus pedidos. Para um entregador com x pedidos, há 2x pontos a visitar (x restaurantes + x clientes), mas com restrição de precedência. O número de permutações possíveis é limitado por (2x)! no pior caso, mas mesmo considerando as restrições, permanece exponencial.
+
+- Entregador com 3 pedidos: até 6 pontos → 6! / (fator de precedência) ≈ **720 / 8 = 90** rotas válidas, mas na ordem de grandeza de centenas.
+- Entregador com 2 pedidos: até 4 pontos → 4! = **24** permutações.
