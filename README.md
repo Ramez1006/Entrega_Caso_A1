@@ -7,4 +7,4 @@
 ## Questão 1 — Classificação do Problema (20 pontos)
 
 ### a) Classificação:
-O problema de roteamento da FastBite pertence à classe **NP-Completo**, porque:** À medida que o número de clientes aumenta, o número de rotas possíveis cresce de forma fatorial.
+O problema de roteamento da FastBite pertence à classe **NP-Completo**, porque: À medida que o número de clientes aumenta, o número de rotas possíveis cresce de forma fatorial.
