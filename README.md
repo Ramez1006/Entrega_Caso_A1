@@ -37,3 +37,13 @@ Suponha que o  entregador esteja no F3 (posição 7,6) poderia receber os pedido
 
 Isso demonstra exatamente o TSP com restrições de precedência, no qual ao transformar o ponto de partida em ponto de retorno, obtemos o TSP clássico. Assim, qualquer instância do TSP pode ser codificada como uma instância do roteamento da FastBite (com um único entregador e sem restrições de janela de tempo), e qualquer instância da FastBite pode ser reduzida a múltiplas instâncias do TSP.
 
+---
+
+### c) Inviabilidade da força bruta — cálculo combinatório
+
+
+**Cenário Apresentado:** 8 pedidos, 3 entregadores, cada um com capacidade para até 3 pedidos.
+
+Supondo as quantidades de permutações possiveis de entrega, dadas acima, precisamos distribuir 8 pedidos entre 3 entregadores, com cada um recebendo no máximo 3. Uma distribuição possível é, por exemplo, (3, 3, 2). O número de maneiras de fazer essa distribuição é dado pela:
+
+C(8,3) × C(5,3) × C(2,2) = 56 × 10 × 1 = 560 combinações de atribuição
