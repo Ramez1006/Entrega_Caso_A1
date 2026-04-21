@@ -133,3 +133,33 @@ Acerca do algoritmo da FastBite, a **propriedade de escolha local** é dupla:
 
 Em ambos os casos, a decisão é irrevogável: uma vez atribuído, o pedido não é reatribuído. Essa é a marca registrada dos algoritmos gulosos.
 
+
+---
+
+### c) Contraexemplo concreto
+
+Considerando uma versão simplificada com 3 pedidos e 2 entregadores (E1 em (0,0) com capacidade 2, e E2 em (10,0) com capacidade 2):
+
+- **P1:** Restaurante em (1,0), cliente em (9,0) — rota longa
+- **P2:** Restaurante em (2,0), cliente em (3,0) — rota curta
+- **P3:** Restaurante em (9,0), cliente em (11,0) — rota curta, próximo de E2
+
+**Algoritmo guloso:**
+- P1: E1 está a distância 1 de (1,0), E2 está a distância 9. → Atribui P1 a E1.
+- P2: E1 está a distância 2 de (2,0), E2 está a distância 8. → Atribui P2 a E1. E1 lotado.
+- P3: Só E2 disponível. → Atribui P3 a E2.
+
+**Resultado guloso:**
+- E1 faz: (0,0)→(1,0)→(2,0)→(3,0)→(9,0) — distância total: 1+1+1+6 = **9**
+- E2 faz: (10,0)→(9,0)→(11,0) — distância total: 1+2 = **3**
+- **Total: 12**
+
+**Solução melhor (não encontrada pelo guloso):**
+- E1 recebe P2 e não P1: (0,0)→(2,0)→(3,0) — distância: 2+1 = **3**
+- E2 recebe P1 e P3: (10,0)→(9,0)→(1,0)→(11,0)→... — na verdade seria ineficiente.
+
+Melhor ainda: E1 recebe {P1, P2}, E2 recebe {P3}... como acima. Mas agora considere:
+- E2 recebe P1 e P3: (10,0)→(9,0)→(1,0)→(9,0)→(11,0) — custoso.
+
+**Contraexemplo mais direto:** Suponha que o entregador mais próximo de um restaurante já está quase no limite de capacidade e seria muito mais valioso para um pedido urgente futuro que surgirá no mesmo ciclo. O algoritmo guloso "desperdiça" o entregador no pedido atual e deixa o pedido urgente com um entregador mais distante — aumentando o risco de atraso. O guloso não tem visão de futuro para reconhecer isso.
+1
