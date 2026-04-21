@@ -180,3 +180,28 @@ Cada entregador tem no máximo x pontos (onde x ≤ capacidade máxima). O algor
 **Complexidade total:** **O(n × m)** — polinomial e viável em tempo real.
 
 Para a FastBite com n = 50 pedidos e m = 20 entregadores no horário de pico: 50 × 20 = 1.000 operações de comparação — trivialmente executável em milissegundos, bem dentro do limite de 2 segundos.
+
+
+
+---
+
+## Questão 3 — Programação Dinâmica e Divisão e Conquista (25 pontos)
+
+### a) Sim, o problema de roteamento de um único entregador com x pedidos (2x pontos a visitar) é uma instância do TSP com restrições de precedência. O TSP admite solução por Programação Dinâmica ( que é a abordagem canônica de PD para esse problema).
+
+1. **Explicação: A rota ótima de A até Z passando por um conjunto S de cidades contém rotas ótimas para os subconjuntos de S. Ou seja, se a rota ótima visita B antes de C, então o trecho de B em diante também é ótimo.
+
+2. **Ao explorar diferentes permutações, o problema de "chegar à cidade X tendo visitado o conjunto S" aparece repetidas vezes. A PD memoiza esses resultados evitando recomputação.
+
+**Custo de memória e tempo:**
+
+- O conjunto S pode ser qualquer subconjunto dos 2k pontos → 2^(2k) subconjuntos possíveis.
+- Para cada subconjunto, registramos o custo para cada ponto de chegada → 2k valores.
+- **Memória:** O(2^(2k) × 2k) = **O(k × 2^(2k))**
+- **Tempo:** Para cada estado, consideramos 2k transições → O(2^(2k) × (2k)²) = **O(k² × 2^(2k))**
+
+**Conclusão: A PD é viável para entregadores com até **k ≈ 10 pedidos**, mas a FastBite permite no máximo 3 pedidos simultâneos. Com k = 3, a PD é perfeitamente aplicável ao problema de roteamento individual. Contudo, o gargalo real é a fase de *atribuição* entre entregadores — problema que a PD sozinha não resolve.
+
+---
+
+### b) Divisão e Conquista aplicado ao roteamento da FastBite
