@@ -205,3 +205,8 @@ Para a FastBite com n = 50 pedidos e m = 20 entregadores no horário de pico: 50
 ---
 
 ### b) Divisão e Conquista aplicado ao roteamento da FastBite
+
+Sim. A ideia central é: se os pedidos de uma região geográfica só são relevantes para entregadores dessa mesma região, então os subproblemas são (aproximadamente) independentes e podem ser resolvidos em paralelo.
+
+**Funcionamneto de divisão Geográfica da Cidade:**
+
