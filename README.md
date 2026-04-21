@@ -119,3 +119,17 @@ Cada entregador percorre seus pontos indo sempre ao ponto mais próximo de sua p
 - De (0,2): mais próximo é C_P2(7,2) com distância 7 → visita C_P2 (entrega P2)
 - De (7,2): visita C_P1(4,5) com distância 6 → entrega P1
 - Rota: (1,1)→(1,1)→(0,2)→(7,2)→(4,5) — distância total: 0+2+7+6 = **15**
+
+
+---
+
+### b) O algoritmo é **guloso (greedy)** quando toma a **melhor decisão local disponível a cada passo**, sem reconsiderar decisões anteriores e sem olhar para o futuro. A estratégia pressupõe que a sequência de ótimos locais converge para um ótimo global — o que nem sempre é verdade.
+
+Acerca do algoritmo da FastBite, a **propriedade de escolha local** é dupla:
+
+1. **Na atribuição:** "Escolha o entregador mais próximo do restaurante do pedido atual." Isso é ótimo localmente para aquele pedido específico, mas ignora como essa escolha afeta os pedidos seguintes.
+
+2. **No roteamento:** "Vá sempre ao ponto mais próximo da posição atual." Isso é o clássico algoritmo de *nearest neighbor* para o TSP 
+
+Em ambos os casos, a decisão é irrevogável: uma vez atribuído, o pedido não é reatribuído. Essa é a marca registrada dos algoritmos gulosos.
+
