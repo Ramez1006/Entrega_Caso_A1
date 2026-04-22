@@ -210,3 +210,35 @@ Sim. A ideia central é: se os pedidos de uma região geográfica só são relev
 
 **Funcionamneto de divisão Geográfica da Cidade:**
 
+Se colocarmos a cidade como dividida em 4 quadrantes (ou zonas), teriamos o seguinte processo:
+
+1. **Divisão:** Particionar os pedidos e os entregadores por zona geográfica.
+
+2. **Conquista (recursiva):** Resolver o problema de atribuição e roteamento dentro de cada zona de forma independente — usando guloso, PD ou outra heurística.
+
+3. **Combinação:** Agregar as soluções de cada zona como a solução global.
+
+
+Isso é especialmente poderoso porque permite **paralelismo**: os 4 subproblemas podem ser processados simultaneamente em threads, diminuindo o tempo de resposta.
+
+**Observação:**
+
+Existe uma fragilidade da divisão geográfica está nas **fronteiras entre zonas**:
+
+
+- Um restaurante pode estar no quadrante NE mas o cliente no SW — o pedido não pertence naturalmente a nenhuma zona.
+- Um entregador posicionado exatamente na fronteira pode atender pedidos de múltiplas zonas com custo similar.
+- Pedidos urgentes próximos à fronteira podem ser melhor atendidos por um entregador da zona vizinha, mas a divisão impede essa visualização.
+
+No cenário da FastBite, P3 tem restaurante em (4,4) e cliente em (0,0) — se a divisão for feita pelo ponto médio (3,3 ou 4,4), esse pedido cruza zonas e complica a atribuição. A solução é tratar pedidos de fronteira separadamente ou criar uma zona de sobreposição (*buffer zone*), mas isso pode aumentar a complexidade da combinação.
+
+**Resumindo:** A divisão e conquista é uma estratégia estrutural poderosa para escalabilidade,mas não garante a otimalidade global e requer tratamento cuidadoso das fronteiras, devido o que foi exposto acima na parte de observação.
+
+
+---
+
+## Questão 4 — Comparação das Abordagens (15 pontos)
+
+### Tabela Comparativa
+
+
