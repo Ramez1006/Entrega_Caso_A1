@@ -257,5 +257,35 @@ Assim dessa maneira a combinação prática ideal seria: **D&C para particioname
 ## Questão 5 — Solução de Engenharia Real 
 
 
+### a)Uma **heurística** é uma estratégia computacional que busca encontrar **soluções boas o suficiente** para um problema em tempo aceitável, sem garantia de otimalidade. Ela utiliza conhecimento do domínio e intuição sobre a estrutura do problema para guiar a busca de forma inteligente, descartando o espaço de soluções que provavelmente é ruim sem explorá-lo exaustivamente.
 
+
+Já no contexto da FastBite, as heurísticas são:
+
+
+1. **Inviabilidade computacional da solução exata:** Como demonstrado, o espaço de soluções cresce fatorialmente. Não existe algoritmo polinomial conhecido para o VRP (e provavelmente não existe, dado que é NP-Completo).
+
+2. **Restrição de tempo real:** O sistema tem 2 segundos para decidir. Uma solução exata para 50 pedidos levaria bilhões de anos.
+
+3. **Valor marginal decrescente da otimalidade:** Uma rota 5% melhor que a heurística economiza segundos de entrega. Uma rota perfeita economiza poucos segundos a mais, mas ao custo de ser computacionalmente impossível.
+
+4. **Variabilidade do ambiente:** O trânsito muda, pedidos chegam, entregadores se movem. Uma solução "ótima" calculada com dados de 30 segundos atrás pode ser pior que uma solução boa calculada com dados atuais.
+
+---
+
+### b) Uma solução robusta poderia ser estruturada em **quatro fases:
+
+**Fase 1 — Particionamento geográfico (Divisão e Conquista):**
+Dividir a cidade em zonas (por exemplo, 4 a 9 quadrantes). Pedidos e entregadores são alocados às suas zonas correspondentes. Isso reduz drasticamente o tamanho de cada subproblema e permite execução paralela. Pedidos de fronteira são tratados pela zona mais próxima ou por uma zona de sobreposição configurável.
+
+**Fase 2 — Heurística gulosa como solução inicial:**
+Dentro de cada zona, aplica-se o algoritmo guloso de atribuição (entregador mais próximo do restaurante) e roteamento (nearest neighbor). Isso produz rapidamente uma solução viável — não ótima, mas funcional — em O(n × m) por zona.
+
+**Fase 3 — Refinamento local (busca local / 2-opt):**
+Com o tempo restante após as fases 1 e 2, aplica-se melhoria iterativa. A técnica mais simples é o *swap* de pedidos: pega-se dois entregadores aleatórios e verifica-se se trocar um pedido entre eles reduz o custo total. Se sim, efetua-se a troca. Outra técnica é o *2-opt*: inverte-se um segmento da rota de um entregador e verifica-se se o custo diminui. Cada iteração tem custo O(n²) mas gera melhorias concretas.
+
+**Fase 4 — Interrupção por tempo (anytime algorithm):**
+O sistema monitora o relógio. Ao atingir 1,8 segundos (com margem de segurança), interrompe o refinamento e utiliza a melhor solução encontrada até o momento. Isso garante que, independentemente da complexidade do ciclo, o sistema sempre entrega uma resposta dentro do prazo.
+
+---
 
