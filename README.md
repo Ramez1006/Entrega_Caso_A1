@@ -6,7 +6,7 @@
 
 **Aluno:** Ramez Marques 
 ---
-## Questão 1 — Classificação do Problema (20 pontos)
+## Questão 1 — Classificação do Problema 
 
 ### a) Classificação:
 O problema de roteamento da FastBite pertence à classe **NP-Completo**, porque: À medida que o número de clientes aumenta, o número de rotas possíveis cresce de forma fatorial.
@@ -70,7 +70,7 @@ Total ≈ 560 (atribuições) × 90 × 90 × 24 (rotas) ≈ 560 × 194.400 ≈ 1
 
 ---
 
-## Questão 2 — Abordagem Gulosa (Greedy) (25 pontos)
+## Questão 2 — Abordagem Gulosa (Greedy) 
 
 **Parte de Atribuição:**
 
@@ -237,7 +237,7 @@ No cenário da FastBite, P3 tem restaurante em (4,4) e cliente em (0,0) — se a
 
 ---
 
-## Questão 4 — Comparação das Abordagens (15 pontos)
+## Questão 4 — Comparação das Abordagens 
 
 ### Tabela Comparativa:
 
@@ -254,7 +254,7 @@ Assim dessa maneira a combinação prática ideal seria: **D&C para particioname
 
 ---
 
-## Questão 5 — Solução de Engenharia Real (10 pontos)
+## Questão 5 — Solução de Engenharia Real 
 
 
 
