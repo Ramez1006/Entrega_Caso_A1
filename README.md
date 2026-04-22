@@ -239,6 +239,23 @@ No cenário da FastBite, P3 tem restaurante em (4,4) e cliente em (0,0) — se a
 
 ## Questão 4 — Comparação das Abordagens (15 pontos)
 
-### Tabela Comparativa
+### Tabela Comparativa:
+
+**Observação:** A tabela comparativa se encontra no pdf
+
+
+### Análise Crítica:
+
+Para a FastBite, a abordagem mais adequada como **solução principal** é a **gulosa (Greedy)**, complementada por uma etapa de refinamento local. O algoritmo guloso atende ao requisito operacional mais crítico: decidir em até 2 segundos para milhares de pedidos diários, com complexidade O(n × m) que garante resposta em milissegundos mesmo no pico de carga.
+
+O problema mais combinatorialmente explosivo — e o ganho de qualidade para k ≤ 3 (máximo da FastBite) é marginal em relação ao custo de implementação. A Divisão e Conquista é uma excelente estratégia **arquitetural e de escalabilidade**, não um algoritmo de otimização por si só: ela pode ser usada para paralelizar a execução do próprio greedy em múltiplas zonas, acelerando ainda mais o sistema.
+
+Assim dessa maneira a combinação prática ideal seria: **D&C para particionamento geográfico + Greedy para atribuição e roteamento inicial + busca local para refinamento**, tudo com limite de tempo estrito.
+
+---
+
+## Questão 5 — Solução de Engenharia Real (10 pontos)
+
+
 
 
