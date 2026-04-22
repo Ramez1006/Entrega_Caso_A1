@@ -289,3 +289,17 @@ O sistema monitora o relógio. Ao atingir 1,8 segundos (com margem de segurança
 
 ---
 
+
+### c)Vale a pena buscar a solução exata quando **o espaço de soluções é pequeno o suficiente** para ser explorado dentro do tempo disponível.
+
+
+**Exemplo:**
+
+Para um **entregador individual com apenas 2 ou 3 pedidos**, a solução exata pode ser calculada em microssegundos por força bruta (6 a 720 permutações), tornando a abordagem ótima trivialmente viável.
+
+---
+
+## Questão 6
+
+
+
